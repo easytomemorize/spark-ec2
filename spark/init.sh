@@ -132,7 +132,7 @@ else
       else
         SCALA_VERSION=`scala -version 2>&1 |awk 'NR==1{ gsub(/"/,""); print $5}'`
         if [[ $SCALA_VERSION == 2.11* ]]; then
-          wget https://dl.dropboxusercontent.com/u/20477463/spark-1.6.0-bin-hadoop-2.4-scala-2.11.tgz
+          wget https://dl.dropboxusercontent.com/u/20477463/spark-1.6.0-bin-2.7.1.tgz
         else
           wget http://s3.amazonaws.com/spark-related-packages/spark-$SPARK_VERSION-bin-hadoop2.4.tgz
         fi
