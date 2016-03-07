@@ -1,7 +1,7 @@
 #!/bin/bash
-# Creates an AMI for the Spark EC2 scripts starting with a stock Amazon 
+# Creates an AMI for the Spark EC2 scripts starting with a stock Amazon
 # Linux AMI.
-# This has only been tested with Amazon Linux AMI 2014.03.2 
+# This has only been tested with Amazon Linux AMI 2014.03.2
 
 set -e
 
@@ -52,9 +52,18 @@ wget "http://archive.apache.org/dist/maven/maven-3/3.2.3/binaries/apache-maven-3
 tar xvzf apache-maven-3.2.3-bin.tar.gz
 mv apache-maven-3.2.3 /opt/
 
+# JDK8
+wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u73-b02/jdk-8u73-linux-x64.tar.gz"
+echo "Unpacking Java 8"
+tar xvzf jdk-8*.tar.gz
+rm jdk-8*.tar.gz
+mv `ls -d jdk1.8* | grep -v ec2` jdk1.8
+alternatives --install /usr/bin/java java /root/jdk1.8/bin/java 3
+alternatives --config java <<< '3'
+
 # Edit bash profile
 echo "export PS1=\"\\u@\\h \\W]\\$ \"" >> ~/.bash_profile
-echo "export JAVA_HOME=/usr/lib/jvm/java-1.7.0" >> ~/.bash_profile
+echo "export JAVA_HOME=/root/jdk1.8" >> ~/.bash_profile
 echo "export M2_HOME=/opt/apache-maven-3.2.3" >> ~/.bash_profile
 echo "export PATH=\$PATH:\$M2_HOME/bin" >> ~/.bash_profile
 
