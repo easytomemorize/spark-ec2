@@ -2,7 +2,7 @@
 
 JAR_DIR="$HOME/ext-jars"
 mkdir -p $JAR_DIR
-S3_PATH="https://s3-us-west-2.amazonaws.com/rm-spark-ec2/JARS"
+S3_PATH="https://s3-us-west-2.amazonaws.com/rm-spark-ec2/jars"
 JARS=("config-1.3.0.jar" "jackson-annotations-2.7.2.jar" "jackson-core-2.7.2.jar" "jackson-databind-2.7.2.jar" "jackson-module-paranamer-2.7.2.jar" "jackson-module-scala_2.11-2.7.2.jar")
 for JAR in "${JARS[@]}"
 do
@@ -27,6 +27,6 @@ done
 COPY_CMD=("$HOME/spark-ec2/copy-dir" "$JAR_DIR")
 "${COPY_CMD[@]}"
 
-SUBMIT_CMD=("$HOME/spark/bin/spark-submit" "--driver-class-path $EXTRA_CLASSPATH" "--conf \"spark.executor.extraClassPath=$EXTRA_CLASSPATH\"" "$@")
-printf '%s\n' "${SUBMIT_CMD[@]}"
+SUBMIT_CMD=("$HOME/spark/bin/spark-submit" "--driver-class-path" "\"$EXTRA_CLASSPATH\"" "--conf" "\"spark.executor.extraClassPath=\"$EXTRA_CLASSPATH\"\"" "$@")
+
 "${SUBMIT_CMD[@]}"
