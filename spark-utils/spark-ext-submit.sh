@@ -27,6 +27,6 @@ done
 COPY_CMD=("$HOME/spark-ec2/copy-dir" "$JAR_DIR")
 "${COPY_CMD[@]}"
 
-SUBMIT_CMD=("$HOME/spark/bin/spark-submit" "--driver-class-path" "\"$EXTRA_CLASSPATH\"" "--conf" "\"spark.executor.extraClassPath=\"$EXTRA_CLASSPATH\"\"" "$@")
+SUBMIT_CMD=("$HOME/spark/bin/spark-submit" "--driver-class-path" "$EXTRA_CLASSPATH" "--conf" "spark.executor.extraClassPath=$EXTRA_CLASSPATH" "$@")
 
 "${SUBMIT_CMD[@]}"
