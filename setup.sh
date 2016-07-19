@@ -93,6 +93,8 @@ for module in $MODULES; do
   cd /root/spark-ec2  # guard against init.sh changing the cwd
 done
 
+export JAVA_HOME=/root/jdk1.8
+
 # Deploy templates
 # TODO: Move configuring templates to a per-module ?
 echo "Creating local config files..."
