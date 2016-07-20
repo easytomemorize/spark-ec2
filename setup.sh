@@ -93,7 +93,10 @@ for module in $MODULES; do
   cd /root/spark-ec2  # guard against init.sh changing the cwd
 done
 
+# Force JDK 8 to be used from here onwards
 export JAVA_HOME=/root/jdk1.8
+alternatives --install /usr/bin/java java /root/jdk1.8/bin/java 3
+alternatives --config java <<< '3'
 
 # Deploy templates
 # TODO: Move configuring templates to a per-module ?
