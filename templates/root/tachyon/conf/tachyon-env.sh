@@ -25,6 +25,9 @@ else
   export TACHYON_RAM_FOLDER=/mnt/ramdisk
 fi
 
+# JDK 1.8 Patch
+export JAVA_HOME="/root/jdk1.8"
+
 export JAVA="$JAVA_HOME/bin/java"
 export TACHYON_MASTER_ADDRESS={{active_master}}
 export TACHYON_UNDERFS_ADDRESS=hdfs://{{active_master}}:9000
