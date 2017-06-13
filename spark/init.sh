@@ -131,7 +131,7 @@ else
         wget http://s3.amazonaws.com/spark-related-packages/spark-$SPARK_VERSION-bin-cdh4.tgz
       else
         SCALA_VERSION=`scala -version 2>&1 |awk 'NR==1{ gsub(/"/,""); print $5}'`
-        if [[ $SCALA_VERSION == 2.11* ]]; then
+        if [[ $SCALA_VERSION == 2.11* ]] && [[ $SPARK_VERSION == 1* ]]; then
           wget https://s3-us-west-2.amazonaws.com/rm-spark-ec2/spark-1.6.0-bin-2.7.1.tgz
         else
           wget http://s3.amazonaws.com/spark-related-packages/spark-$SPARK_VERSION-bin-hadoop2.4.tgz
